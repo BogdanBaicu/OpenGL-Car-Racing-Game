@@ -1,5 +1,5 @@
 #include "object3D.h"
-#include "lab_m1/CarRacing/CarRacing.h"
+#include "lab_m1/tema2/tema2.h"
 
 #include <vector>
 #include <iostream>
@@ -89,14 +89,14 @@ Mesh* object3D::CreateTrack(
         glm::vec3(-45.45, 0, 6.69),
         glm::vec3(-46.71, 0, 1.76) 
     };
-    std::vector<glm::vec3> innerTrackPoints, outterTrackPoints; 
+    std::vector<glm::vec3> innerTrackPoints, outerTrackPoints; 
     
     for (int i = 0; i < trackPoints.size() - 1; i++) {
         d = trackPoints[i + 1] - trackPoints[i];
         p = glm::cross(d, up);
         p = glm::normalize(p);
         innerTrackPoints.push_back(trackPoints[i] + 2.f * p);
-        outterTrackPoints.push_back(trackPoints[i] - 3.f * p);
+        outerTrackPoints.push_back(trackPoints[i] - 3.f * p);
         treePositions.push_back(trackPoints[i] + 4.f * p);
         treePositions.push_back(trackPoints[i] - 5.f * p);
         trackPositions.push_back(trackPoints[i] + 2.f * p);
@@ -107,7 +107,7 @@ Mesh* object3D::CreateTrack(
         p = glm::cross(d, up);
         p = glm::normalize(p);
         innerTrackPoints.push_back(trackPoints[trackPoints.size() - 1] + 2.f * p);
-        outterTrackPoints.push_back(trackPoints[trackPoints.size() - 1] - 3.f * p);
+        outerTrackPoints.push_back(trackPoints[trackPoints.size() - 1] - 3.f * p);
         treePositions.push_back(trackPoints[trackPoints.size() - 1] + 3.f * p);
         treePositions.push_back(trackPoints[trackPoints.size() - 1] - 4.f * p);
         trackPositions.push_back(trackPoints[trackPoints.size() - 1] + 2.f * p);
@@ -122,7 +122,7 @@ Mesh* object3D::CreateTrack(
     std::vector<VertexFormat> vertices = {};
     for (int i = 0; i < trackPoints.size(); i++) {
         vertices.push_back(VertexFormat(innerTrackPoints[i], color));
-        vertices.push_back(VertexFormat(outterTrackPoints[i], color));
+        vertices.push_back(VertexFormat(outerTrackPoints[i], color));
     }
     
     Mesh* track = new Mesh(name);
